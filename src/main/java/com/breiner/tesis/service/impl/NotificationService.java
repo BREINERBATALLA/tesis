@@ -1,5 +1,6 @@
 package com.breiner.tesis.service.impl;
 
+import com.breiner.tesis.service.INofiticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import software.amazon.awssdk.services.sns.model.SubscribeRequest;
 
 @RequiredArgsConstructor
 @Service
-public class NotificationService {
+public class NotificationService implements INofiticationService {
 
     private final SnsClient snsClient;
     @Value("${aws.topic-arn}")

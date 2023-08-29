@@ -1,6 +1,6 @@
 package com.breiner.tesis.service;
 
-public interface NofiticationService {
+public interface INofiticationService {
 
     void subscribeUser(String userEmail);
 

@@ -1,5 +1,6 @@
 package com.breiner.tesis.service.impl;
 
+import com.breiner.tesis.service.IFileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,13 +20,13 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class FileService {
+public class FileService implements IFileService {
 
     private final S3Client s3Client;
     @Value("${aws.bucket-name}")
     private String bucketName;
 
-    public String uploadAudio(MultipartFile file) {
+    public String uploadFile(MultipartFile file) {
         String nameFile = LocalDate.now().toString()+file.getOriginalFilename();
 
         PutObjectRequest request = PutObjectRequest.builder()
@@ -41,7 +42,8 @@ public class FileService {
         return nameFile;
     }
 
-    public void deleteAudio(String fileName) {
+
+    public void deleteFile(String fileName) {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
                 .bucket(bucketName)
                 .key(fileName)
@@ -56,8 +58,5 @@ public class FileService {
          return "No se pudo eliminar el archivo de audio";
          }
          */
-
     }
-
-
 }
