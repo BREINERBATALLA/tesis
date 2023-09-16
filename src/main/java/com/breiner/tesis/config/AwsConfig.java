@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.*;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.ses.SesClient;
 import software.amazon.awssdk.services.sns.SnsClient;
 
 @Configuration
@@ -35,6 +36,14 @@ public class AwsConfig {
     @Bean
     public SnsClient snsClient() {
         return SnsClient.builder()
+                .region(Region.of(awsRegion))
+                .credentialsProvider(createCredentialsProvider())
+                .build();
+    }
+
+    @Bean
+    public SesClient sesClient(){
+        return SesClient.builder()
                 .region(Region.of(awsRegion))
                 .credentialsProvider(createCredentialsProvider())
                 .build();

@@ -16,6 +16,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -27,7 +28,8 @@ public class FileService implements IFileService {
     private String bucketName;
 
     public String uploadFile(MultipartFile file) {
-        String nameFile = LocalDate.now().toString()+file.getOriginalFilename();
+        String uuid = UUID.randomUUID().toString();
+        String nameFile = LocalDate.now().toString()+uuid+file.getOriginalFilename();
 
         PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(bucketName)
@@ -35,7 +37,12 @@ public class FileService implements IFileService {
                 .build();
         try {
             s3Client.putObject(request, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+            if(false){
+                throw new Exception("something went wrong saving image");
+            }
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 

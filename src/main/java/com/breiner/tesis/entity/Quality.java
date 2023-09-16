@@ -1,19 +1,19 @@
 package com.breiner.tesis.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class Quality {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idQuality;
 
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "idPetAdoption")
-    private PetAdoption petAdoption;
+    @JoinColumn(name = "idPetAdoption") //org.hibernate.dialect.MySQLDialect
+    private AdoptionPet petAdoption;
 }

@@ -28,7 +28,6 @@ public class AuthenticationController {
                 .body(authenticationService.registerUser(userRegisterDTO));
     }
 
-
     @PostMapping(path = "/sign-in")
     public ResponseEntity<JwtResponseDto> signIn(
             @RequestBody AuthUserDto authUserDto

@@ -10,12 +10,13 @@ import com.breiner.tesis.entity.User;
 import com.breiner.tesis.enumeration.Role;
 import com.breiner.tesis.repository.UserRepository;
 import com.breiner.tesis.service.IAuthenticationService;
+import com.breiner.tesis.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.breiner.tesis.service.INofiticationService;
+import com.breiner.tesis.service.INotificationService;
 
 import java.security.SecureRandom;
 
@@ -23,24 +24,24 @@ import java.security.SecureRandom;
 @RequiredArgsConstructor
 public class AuthenticationService implements IAuthenticationService {
 
-    private final UserRepository userRepository;
+    private final IUserService userService;
     private final PasswordEncoder passwordEncoder;
-    private final INofiticationService notificationService;
+    private final INotificationService notificationService;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     @Override
     public ResponseUserDto registerUser(UserRegisterDto user) {
-        User newUser = new User();
-        newUser.setEmail(user.email());
-        newUser.setFirstName(user.firstName());
-        newUser.setLastName(user.lastName());
-        newUser.setIdentificationNumber(user.identificationNumber());
         String passwordGenerated = generateRandomPassword(10);
-        newUser.setPassword(passwordEncoder.encode(passwordGenerated));
-        newUser.setRole(Role.ADOPTER);
-        userRepository.save(newUser);
         notificationService.subscribeUser(user.email());
+        userService.saveAdoptantUser(user, passwordEncoder.encode(passwordGenerated));
+        return new ResponseUserDto(passwordGenerated);
+    }
+
+    public ResponseUserDto registerAdminUser(UserRegisterDto user) {
+        String passwordGenerated = generateRandomPassword(10);
+        notificationService.subscribeAdmin(user.email());
+        userService.saveAdminUser(user, passwordGenerated);
         return new ResponseUserDto(passwordGenerated);
     }
 
@@ -52,7 +53,7 @@ public class AuthenticationService implements IAuthenticationService {
                 )
         ); //lanza exepcion si no encuentra dicho user y pass
         //both are coreect si llega acá.
-        var user = userRepository.findByEmail(authUserDto.email())
+        var user = userService.findByEmail(authUserDto.email())
                 .orElse(null);
         var jwtToken = jwtService.generateToken(user);
         return new JwtResponseDto(jwtToken);

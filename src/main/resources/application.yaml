@@ -1,23 +1,25 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/prueba?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: ${USERNAME}
-    password: ${PASSWORD}
+    url: jdbc:mysql://localhost:3306/tesis?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
 aws:
-  accessKey: ${ACCESS_KEY}
-  secretKey: ${SECRET_KEY}
-  region: ${REGION}
-  bucket-name: ${BUCKET_NAME}
-  topic-arn: ${TOPIC_ARN}
+  accessKey: AKIAZHDWQON4ZLCNSIMU
+  secretKey: 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
+  region: us-east-1
+  bucket-name: photos-pets-tesis
+  topic-arn-new-pet: arn:aws:sns:us-east-1:633756218233:new-pet-adoption
+  topic-arn-adoption-request: arn:aws:sns:us-east-1:633756218233:adoption-request
+  email: "breiner.batalla@correounivalle.edu.co"
 
 servlet:
   multipart:
@@ -26,3 +28,6 @@ servlet:
 
 server:
   port: 8081
+
+jwt:
+  secretKey: ZwxNFYDMsBEEixem1Ec6hWYTrG1q2IDKx8bMV2HgsKtcxtPssGLq9+d8QYyEdL2HWRdaCEsfijcXrtmevaId9r2KRUuLbbvIDSmf23ffTjOzKhDXMyOCtOxQKmLIRsLbNeL8ySDfgiuv30Q90C8tIHrk9/qI/e96u0+0Ir3IEgBqlHp+Y3etOjZiMj46FeqKrEtg1ioJGL5xvhHlP5bGNYVnQCcY4zXOwGZLm5dF+cjjKPBDWSlZ4jKgDOVaslWsHwKR2B6LWwWvSmjo9J5vYkCovwXJSGxK9FN0QV3AsQyorz9ewteVNv8jXuQg5hJUqAziZ1evEBaRy2cV4XgDq5H5Xu4QQElwktBqXkvv6qQ=

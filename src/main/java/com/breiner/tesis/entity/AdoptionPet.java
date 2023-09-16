@@ -3,14 +3,17 @@ package com.breiner.tesis.entity;
 import com.breiner.tesis.enumeration.Sex;
 import com.breiner.tesis.enumeration.TypePet;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 public class AdoptionPet {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idAdoptionPet;
 
     @Enumerated(EnumType.STRING)
@@ -20,16 +23,17 @@ public class AdoptionPet {
 
     private boolean adopted; //where clause to show available pets
 
-   // private Integer edadEnMeses; //guardar fecha de nacimiento y a partir de allí, calcular edad en meses.
+    private Integer ageInMonths; //guardar fecha de nacimiento y a partir de allí, calcular edad en meses.
+
     private LocalDate birthDate;
 
-    private String typeFur;
+    private String coatType; //tipo de pelaje
 
     private String eyeColor;
 
     private String adoptionCondition;
 
-    private String raca;
+    private String race;
 
     @Enumerated(EnumType.STRING)
     private TypePet typePet;
@@ -38,7 +42,7 @@ public class AdoptionPet {
 
     private String name;
 
-    @OneToMany(mappedBy = "mascotaAdopcion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "petAdoption", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Quality> qualityList;
 
 

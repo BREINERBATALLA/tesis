@@ -1,17 +1,18 @@
 package com.breiner.tesis.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class LostPetReportForm {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idLostPetReportForm;
 
-    private String addressLastPlaceSeen;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Address addressLastPlaceSeen;
 
     private String additionalInformation;
 
@@ -20,4 +21,8 @@ public class LostPetReportForm {
     @OneToOne
     @JoinColumn(name = "idLostPet")
     private LostPet lostPet;
+
+    @ManyToOne()
+    @JoinColumn(name = "idUser")
+    private User user;
 }

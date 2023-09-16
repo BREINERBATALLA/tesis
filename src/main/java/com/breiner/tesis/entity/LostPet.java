@@ -1,19 +1,22 @@
 package com.breiner.tesis.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class LostPet {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idLostPet;
 
     private String description;
 
     private String photo;
 
-    private String addressLastPlaceSeen;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Address addressLastPlaceSeen;
 
     private String name;
 
