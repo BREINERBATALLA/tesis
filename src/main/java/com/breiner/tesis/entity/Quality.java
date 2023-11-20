@@ -1,5 +1,8 @@
 package com.breiner.tesis.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +17,8 @@ public class Quality {
     private String description;
 
     @ManyToOne
+    @JsonIgnore
+    @JsonManagedReference
     @JoinColumn(name = "idPetAdoption") //org.hibernate.dialect.MySQLDialect
     private AdoptionPet petAdoption;
 }

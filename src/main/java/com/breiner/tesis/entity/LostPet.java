@@ -21,4 +21,13 @@ public class LostPet {
     private String name;
 
     private String race;
+
+    private boolean found;
+
+    private String ownerEmail;
+    @PrePersist
+    public void setDefaultValues() {
+        this.found = false;
+    }
+
 }

@@ -41,7 +41,7 @@ public class AuthenticationService implements IAuthenticationService {
     public ResponseUserDto registerAdminUser(UserRegisterDto user) {
         String passwordGenerated = generateRandomPassword(10);
         notificationService.subscribeAdmin(user.email());
-        userService.saveAdminUser(user, passwordGenerated);
+        userService.saveAdminUser(user, passwordEncoder.encode(passwordGenerated));
         return new ResponseUserDto(passwordGenerated);
     }
 

@@ -13,13 +13,13 @@ spring:
         format_sql: true
 
 aws:
-  accessKey: AKIAZHDWQON4ZLCNSIMU
-  secretKey: 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
+  accessKey: AKIAZHDWQON47FVLVXMF
+  secretKey: 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
   region: us-east-1
   bucket-name: photos-pets-tesis
   topic-arn-new-pet: arn:aws:sns:us-east-1:633756218233:new-pet-adoption
   topic-arn-adoption-request: arn:aws:sns:us-east-1:633756218233:adoption-request
-  email: "breiner.batalla@correounivalle.edu.co"
+  email: "batallabreiner69@gmail.com"
 
 servlet:
   multipart:
@@ -28,6 +28,10 @@ servlet:
 
 server:
   port: 8081
+
+path:
+  report: C:\\Reports\\
+  properties-fundation: C:\\Properties\\fundation.properties
 
 jwt:
   secretKey: ZwxNFYDMsBEEixem1Ec6hWYTrG1q2IDKx8bMV2HgsKtcxtPssGLq9+d8QYyEdL2HWRdaCEsfijcXrtmevaId9r2KRUuLbbvIDSmf23ffTjOzKhDXMyOCtOxQKmLIRsLbNeL8ySDfgiuv30Q90C8tIHrk9/qI/e96u0+0Ir3IEgBqlHp+Y3etOjZiMj46FeqKrEtg1ioJGL5xvhHlP5bGNYVnQCcY4zXOwGZLm5dF+cjjKPBDWSlZ4jKgDOVaslWsHwKR2B6LWwWvSmjo9J5vYkCovwXJSGxK9FN0QV3AsQyorz9ewteVNv8jXuQg5hJUqAziZ1evEBaRy2cV4XgDq5H5Xu4QQElwktBqXkvv6qQ=

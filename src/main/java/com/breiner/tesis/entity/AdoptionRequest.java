@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Builder
+@Table(name = "adoption_request")
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdoptionRequest {
@@ -27,7 +28,7 @@ public class AdoptionRequest {
     @CreationTimestamp
     private LocalDate dateAdoptionRequest;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "idAdoptionPet")
     private AdoptionPet adoptionPet;
 

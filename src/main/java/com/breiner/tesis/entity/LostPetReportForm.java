@@ -18,7 +18,7 @@ public class LostPetReportForm {
 
     private boolean atYourDisposition;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idLostPet")
     private LostPet lostPet;
 

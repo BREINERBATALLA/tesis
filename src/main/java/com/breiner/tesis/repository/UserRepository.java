@@ -3,6 +3,7 @@ package com.breiner.tesis.repository;
 import com.breiner.tesis.entity.User;
 import com.breiner.tesis.enumeration.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
