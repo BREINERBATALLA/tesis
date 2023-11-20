@@ -6,7 +6,7 @@ target/
 
 src/main/resources/application.yaml
 /src/main/resources/application.yaml
-/src/main/resources/*
+/src/main/resources/**
 /src/main/**/application.yaml
 
 

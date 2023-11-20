@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/auth")
-//@PreAuthorize(value = "hasAnyRole('ADMIN', 'USER')")
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService; //debo separar en AuthenticationService.
+    private final AuthenticationService authenticationService;
 
-//    @PreAuthorize(value = "hasRole('USER')")
     @PostMapping(path = "/register")
     public ResponseEntity<ResponseUserDto> register(
             @RequestBody UserRegisterDto userRegisterDTO

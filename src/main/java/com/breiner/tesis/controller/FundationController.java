@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class FundationController {
     private final lFundationInfoService fundationInfoService;
 
-
     @GetMapping()
     public ResponseEntity<FundationInfoDto> getFundationInfo(){
         return ResponseEntity.ok(fundationInfoService.getFundationInfo());
