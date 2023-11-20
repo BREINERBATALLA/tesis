@@ -34,7 +34,7 @@ public class AdoptionRequestService implements IAdoptionRequestService {
     private final UserMapper userMapper;
 
     @Override
-    public Long sentAdoptionRequest(AdoptionRequestDto adoptionRequestDto, Long adoptionPetId) { //dto con todo.. y creo los objetos(dto con ambos objetos)
+    public Long sentAdoptionRequest(AdoptionRequestDto adoptionRequestDto, Long adoptionPetId) {
         UserDto currentUser= userService.getCurrentLoggedUser();
         User loggedUser = userMapper.toUserFromUserDto(currentUser);
         AdoptionPet adoptionPet = adoptionPetMapper.toAdoptionPetFromAdoptionResponseDto(
