@@ -28,7 +28,7 @@ import static org.springframework.http.HttpMethod.POST;
 @EnableWebSecurity //remplaza el extends webSecurityConfig..
 @RequiredArgsConstructor
 //@EnableAspectJAutoProxy
-//@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -47,8 +47,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("api/v1/auth/**") //representa nuestros path
                 .permitAll() //permite todo los pattern de arriba
-                .requestMatchers(POST,"/api/v1/adoption-pet/create").hasRole(ADMIN.name())
-                .requestMatchers(POST,     "api/v1/admin/**").hasRole(ADMIN.name())
                 .anyRequest()
                 .authenticated() //todas las demas (anyRequest) necesitan estar autenticado el user
                 .and() //add new configuration

@@ -45,7 +45,7 @@ public class LostPetService implements ILostPetService {
         String fileName = fileService.uploadFile(lostPetDto.photoFile());
         LostPet lostPet = lostPetMapper.toLostPet(lostPetDto);
         lostPet.setPhoto(fileName);
-        return lostPetMapper.toLostPetResponseDto(lostPetRespository.save(lostPetMapper.toLostPet(lostPetDto)));
+        return lostPetMapper.toLostPetResponseDto(lostPetRespository.save(lostPet));
     }
 
     @Override
@@ -71,11 +71,21 @@ public class LostPetService implements ILostPetService {
         LostPetReportForm lostPetReportForm = lostPetMapper.toLostPetReportFrom(lostPetReportFormDto);
         lostPetReportForm.setLostPet(lostPet);
         lostPetReportForm.setUser(loggedUser);
+
+
         //enviarla al admin.
         Long id = lostPetReportFormRepository.save(lostPetReportForm).getIdLostPetReportForm();
-        notificationService.publishMessageNewAdoptionRequest("REPORTE DE MASCOTA PERDIDA",
-                "ACABA DE LLEGAR UN REPORTE CON INFORMACIÓN DE UNA MASCOTA PERDIDA!" +
-                        "CON ID: "+ id);
+        String atDisposition = lostPetReportForm.isAtYourDisposition()? "Si" : "No";
+        String message = "REPORTE DE MASCOTA PERDIDA\",\n" +
+                "\"ACABA DE LLEGAR UN REPORTE CON INFORMACIÓN DE UNA MASCOTA PERDIDA!\n" +
+                "Datos del reporte:\n" +
+                "Id mascota perdida: " + lostPetReportForm.getLostPet().getIdLostPet() + "\n" +
+                "Nombre del usuario: " + lostPetReportForm.getUser().getFirstName() + "\n" +
+                "Nombre de la mascota perdida: " + lostPetReportForm.getLostPet().getName() + "\n" +
+                "Está la mascota en disposición de quién reporta: " + atDisposition + "\n" +
+                "Correo electronico dueño mascota: " + lostPetReportForm.getLostPet().getOwnerEmail();
+        notificationService.publishMessageNewAdoptionRequest(message,
+                "ACABA DE LLEGAR UN REPORTE CON INFORMACIÓN DE UNA MASCOTA PERDIDA! ");
         return id;
     }
 

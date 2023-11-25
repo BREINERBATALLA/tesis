@@ -49,7 +49,8 @@ public class AdminService implements IAdminService {
         }
 
         adoptionRequestService.saveAdoptionRequest(adoptionRequest);
-        notificationService.sendEmail(requestDto.message(),
+        notificationService.sendEmail(requestDto.message() +"Dirección: " +
+                        fileService.setProperties().getProperty("address")+" \n",
                 "ACTUALIZACIÓN DEL ESTADO DE SU SOLICITUD DE ADOPCIÓN",
                 userEmail);
     }
