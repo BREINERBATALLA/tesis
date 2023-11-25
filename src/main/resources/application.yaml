@@ -13,8 +13,8 @@ spring:
         format_sql: true
 
 aws:
-  accessKey: AKIAZHDWQON47FVLVXMF
-  secretKey: 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
+  accessKey: NOT-ACTIVE
+  secretKey: NOT-ACTIVE
   region: us-east-1
   bucket-name: photos-pets-tesis
   topic-arn-new-pet: arn:aws:sns:us-east-1:633756218233:new-pet-adoption
