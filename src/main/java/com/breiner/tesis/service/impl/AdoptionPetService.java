@@ -109,6 +109,13 @@ public class AdoptionPetService implements IAdoptionPetService {
     }
 
     @Override
+    public List<AdoptionPetPresentationDto> getAllAdoptionPetsByTam(String tam) {
+        return adoptionPetRepository.findAllBySize(tam)
+                .stream().map(adoptionPetMapper::toAdoptionPetsAdoptionPetPresentationDto)
+                .toList();
+    }
+
+    @Override
     public List<AdoptionPetPresentationDto> getAllAdoptionPetsBySex(String sex) {
         return adoptionPetRepository.findAllBySex(Sex.valueOf(sex)).stream().
                 map(adoptionPetMapper::toAdoptionPetsAdoptionPetPresentationDto)

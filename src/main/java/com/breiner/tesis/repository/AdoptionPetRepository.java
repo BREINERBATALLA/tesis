@@ -14,6 +14,8 @@ public interface AdoptionPetRepository extends JpaRepository<AdoptionPet, Long> 
 
     List<AdoptionPet> findAllByAdoptedIsTrue();
 
+    List<AdoptionPet> findAllBySize(String size);
+
     List<AdoptionPet> findAllByAdoptedIsFalse();
 
     List<AdoptionPet> findAllByRace(String race);

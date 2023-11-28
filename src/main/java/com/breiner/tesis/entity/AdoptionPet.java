@@ -4,6 +4,7 @@ import com.breiner.tesis.enumeration.Sex;
 import com.breiner.tesis.enumeration.TypePet;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
@@ -16,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-//@Where(clause = "adopted =false")
 public class AdoptionPet {
 
     @Id
@@ -51,7 +51,8 @@ public class AdoptionPet {
 
     private String description;
 
-    private String size;  //@Valid para validar 3 posibles BIG, LITTLE, MEDIUM
+    @Pattern(regexp = "^(Big|Little|Medium)$", message = "El tamaño debe ser Big, Little o Medium")
+    private String size;
 
     private String name;
 

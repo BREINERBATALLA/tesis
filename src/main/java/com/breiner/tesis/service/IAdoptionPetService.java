@@ -25,6 +25,8 @@ public interface IAdoptionPetService {
 
     public List<AdoptionPetPresentationDto> getAllAdoptionPetsByPet(String pet);
 
+    public List<AdoptionPetPresentationDto> getAllAdoptionPetsByTam(String tam);
+
     public List<AdoptionPetPresentationDto> getAllAdoptionPetsBySex(String sex);
 
     public List<AdoptionPetPresentationDto> getAllAdoptionPetsByRace(String race);

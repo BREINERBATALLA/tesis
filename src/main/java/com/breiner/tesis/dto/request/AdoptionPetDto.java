@@ -4,6 +4,7 @@ import com.breiner.tesis.entity.Quality;
 import com.breiner.tesis.enumeration.Sex;
 import com.breiner.tesis.enumeration.TypePet;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +29,7 @@ public record AdoptionPetDto(
         boolean vaccinated,
 
         boolean dewormed,
-
+        @Pattern(regexp = "^(Big|Little|Medium)$", message = "El tamaño debe ser Big, Little o Medium")
         String size,
         List<QualityDto> qualityList
 ) {

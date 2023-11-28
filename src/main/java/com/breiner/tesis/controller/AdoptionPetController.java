@@ -4,6 +4,7 @@ import com.breiner.tesis.dto.request.AdoptionPetDto;
 import com.breiner.tesis.dto.response.AdoptionPetPresentationDto;
 import com.breiner.tesis.dto.response.AdoptionPetResponseDto;
 import com.breiner.tesis.service.IAdoptionPetService;
+import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class AdoptionPetController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path = "/create")
     public ResponseEntity<AdoptionPetResponseDto> register(
-            @ModelAttribute AdoptionPetDto adoptionPetDto
+            @ModelAttribute @Valid AdoptionPetDto adoptionPetDto
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(adoptionPetService.saveAdoptionPet(adoptionPetDto));
@@ -59,10 +60,14 @@ public class AdoptionPetController {
     }
 
     @GetMapping("/filter/all/by-condition")
-    public ResponseEntity<List<AdoptionPetPresentationDto>> getAllBySize(){
+    public ResponseEntity<List<AdoptionPetPresentationDto>> getAllByCondition(){
         return ResponseEntity.ok(adoptionPetService.getAllAdoptionPetsDewordmedAndVacinnated());
     }
 
+    @GetMapping("/filter/all/size")
+    public ResponseEntity<List<AdoptionPetPresentationDto>> getAllBySize(@Valid @PathParam("size")String size){
+        return ResponseEntity.ok(adoptionPetService.getAllAdoptionPetsByTam(size));
+    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
